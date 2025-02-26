@@ -1,0 +1,11 @@
+kivy
+kivymd
+opencv-python
+pillow
+torch
+transformers
+easyocr
+gtts
+playsound
+speechrecognition
+googletrans

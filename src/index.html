@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netra AI - Scene Description</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        video {
+            width: 80%;
+            max-width: 640px;
+            border: 2px solid black;
+        }
+        select, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #description {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Netra AI - Scene Description</h1>
+    
+    <video id="videoStream" autoplay></video>
+    <br>
+    <select id="language">
+        <option value="en">English</option>
+        <option value="te">Telugu</option>
+        <option value="hi">Hindi</option>
+        <option value="ta">Tamil</option>
+        <option value="kn">Kannada</option>
+        <option value="mr">Marathi</option>
+        <option value="bn">Bengali</option>
+        <option value="gu">Gujarati</option>
+        <option value="ml">Malayalam</option>
+        <option value="ur">Urdu</option>
+    </select>
+    <button onclick="getDescription()">Describe Scene</button>
+    
+    <p id="description">Description will appear here...</p>
+    
+    <script>
+        // Load video stream from Flask
+        document.getElementById('videoStream').src = "http://localhost:5000/video";
+        
+        function getDescription() {
+            let language = document.getElementById("language").value;
+            fetch(`/get_description?lang=${language}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("description").innerText = data.description;
+                    let audio = new Audio(data.audio_url);
+                    audio.play();
+                })
+                .catch(error => console.error("Error fetching description:", error));
+        }
+    </script>
+</body>
+</html>
