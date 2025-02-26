@@ -9,3 +9,6 @@ gtts
 playsound
 speechrecognition
 googletrans
+briefcase
+cython
+pythonforandroid

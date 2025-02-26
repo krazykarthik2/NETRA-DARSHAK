@@ -126,5 +126,6 @@ def speak_text(text):
     except Exception as e:
         print("Speech error:", e)
 
-if __name__ == '__main__':
+# this will be run in __main__
+def main():
     app.run(debug=True, host="0.0.0.0", port=5000)
